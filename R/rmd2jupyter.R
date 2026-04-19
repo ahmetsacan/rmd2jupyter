@@ -5,8 +5,10 @@
 #' @param x Name of Rmd file
 #' @return Saves file with .ipynb extension
 #' @export
-rmd2jupyter <- function(x) {
-  save_as <- gsub("\\.Rmd", ".ipynb", x)
+rmd2jupyter <- function(x,save_as = NULL) {
+  if (is.null(save_as)) {
+    save_as <- sub("\\.Rmd$", ".ipynb", x, ignore.case = TRUE)
+  }
   con <- file(x)
   x <- readLines(con, warn = FALSE)
   close(con)
